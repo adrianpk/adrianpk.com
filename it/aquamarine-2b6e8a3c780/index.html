@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q0L6W62B0S"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-Q0L6W62B0S');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aquamarine - Adrian PK</title>
+    <meta name="description" content="A Platform Kit">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta property="og:title" content="Aquamarine">
+    <meta property="og:description" content="A Platform Kit">
+    <meta property="og:image" content="https://adrianpk.com/assets/images/posts/aquamarine/header.webp">
+    <meta property="og:url" content="https://adrianpk.com/it/aquamarine-2b6e8a3c780/">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+    <nav>
+        <div class="site-container" style="padding: 0;">
+            <a href="/">adrianpk.com</a>
+            <a href="/it/" class="active">IT</a>
+            <a href="/nei/">Nei</a>
+            <a href="/news/">News</a>
+        </div>
+    </nav>
+
+    <!-- Hero with Frosted Glass -->
+    <div class="hero-wrapper boxed">
+        <img class="hero-image" src="/assets/images/posts/aquamarine/header.webp" alt="Aquamarine">
+        <div class="hero-title-box">
+            <h1 class="hero-title">Aquamarine</h1>
+            <p class="hero-subtitle">A Platform Kit</p>
+        </div>
+    </div>
+
+    <div class="site-container">
+        <div class="article-meta">
+            <span>April 12, 2025</span>
+            <div class="article-tags">
+                <span class="tag">IT</span>
+            </div>
+        </div>
+
+        <article class="prose">
+            <h2>Intro</h2>
+
+            <p>There aren't as many as in other ecosystems, but Go has its share of full-stack solutions that could be called web frameworks. Still, this project is not about trying to build yet another one. <strong>Aquamarine</strong> is more of a personal exercise. It's a way to capture the patterns and structures I've come to appreciate over years of working on different Go projects.</p>
+
+            <p>These ideas come from hands-on work. When there were a few reasonable ways to approach something, I simply went with what felt more natural and pragmatic. Not because it was better in some universal sense, just because it made sense in the flow of real projects.</p>
+
+            <p>Much of what this kit will generate, I already tend to do almost automatically when starting a new Go project. It's not about ego; it's just a form of structured entertainment. I enjoy the process, and I find it satisfying to encode these patterns in a way that makes consistency effortless and repeatable.</p>
+
+            <p>Some of these patterns are practically hardcoded in my fingers at this point. And while I enjoy setting things up manually, I also find it useful to have a way to bootstrap new ideas quickly. The goal is to follow those same familiar lines without repeating the same choreography every time.</p>
+
+            <p>So no, I wouldn't really call Aquamarine a framework. Frameworks aren't all that common in the Go ecosystem, and this project isn't trying to introduce one. I tend to associate frameworks with rigid, highly opinionated ways of doing things, and that's not the intention here. It's closer to a code generator. A way to apply patterns I've seen work well across teams, companies, and projects of different sizes. Not all of them were equally polished, of course, but the ones I enjoyed the most followed similar principles. This just tries to capture that in a reusable way. Nothing revolutionary, just something that feels solid and familiar.</p>
+
+            <p>To generate something meaningful, we first need a concrete use case to shape around. That's why this effort starts with a very simple application: a Todo list. It's the classic step after "Hello World". Sure, it could all fit in a single main.go file, but that's not the point. The goal is to build it in a way that surfaces all the edges: naming, structure, flows, conventions. Every corner case the generator might need to handle later should be encountered here first.</p>
+
+            <p>The idea of a <em>platform kit</em> goes a bit beyond just code generation. Initially, shared features live in a common internal package, but there's room for that to evolve. At some point, it might make sense to extract them into a standalone module, usable as a library. Or maybe offer a choice: import it, or generate the code directly into your project if you prefer something you can tweak and own fully. Both paths are valid. That kind of flexibility is very much part of what I want Aquamarine to explore.</p>
+
+            <h2>What to Expect</h2>
+
+            <p>Aquamarine favors a command-query style of interface design. This isn't strict CQRS. Commands do return data. But the philosophy is the same: routes represent <strong>actions</strong> (commands and queries), not just resources being acted upon. Event sourcing isn't part of the initial setup, but support for it is on the roadmap as a possible extension for use cases that need it.</p>
+
+            <p>This approach is closely aligned with Domain-Driven Design. Endpoints are named after business actions, not technical operations. Instead of <code>GET /tasks/123</code>, you might have <code>/edit-task</code> or <code>/assign-task-to-user</code>. The semantics are clearer. This helps establish a shared language between developers, stakeholders, and users. Ideally, a non-technical person should be able to understand the intent of an application just by looking at its URLs.</p>
+
+            <p>Features are organized by bounded contexts. Each feature lives in its own package and may include one or more related business entities. Routing, handlers (web and API), app services, repository interfaces, gRPC servers, pub/sub hooks. All of it is grouped together under the feature's namespace. These features are designed to be self-contained. Ideally, they don't share data structures or tables directly with one another. Instead, interactions between features should happen through clearly defined interfaces or messaging mechanisms, such as gRPC for synchronous calls or NATS for asynchronous events. This makes it easier to break out features into separate services later on if needed.</p>
+
+            <p>That said, not everything has to be modeled as a command-query feature. There are perfectly valid reasons, pragmatic or technical, for offering <strong>RESTful endpoints</strong> as well. Some clients expect it. Some operations are trivial. Aquamarine supports this too.</p>
+
+            <p>RESTful resources are also feature-packaged. Each resource lives in its own namespace with its own routing, handlers, services, and interfaces. The difference is mainly in the shape of the URLs and the verbs used: <code>GET /res/task/123</code> and <code>POST /res/task</code> instead of <code>/get-task-details</code> or <code>/create-task</code>. REST resources follow conventional paths but live side by side with the more expressive command-query ones.</p>
+
+            <p>No approach is enforced. Aquamarine provides the structure and the primitives. It's up to you to decide how strictly to follow them. These principles set the tone for what Aquamarine will generate. But principles are one thing. Implementation is another. So how exactly will this be built? That's what the next section explores.</p>
+
+            <h2>Building from Something Real</h2>
+
+            <p>In order to generate useful code, the generator has to know what it's generating. That means starting from something concrete. Something that reflects the kinds of patterns and situations you'd want to support in larger, real-world projects.</p>
+
+            <p>That "something" is a simple Todo list app.</p>
+
+            <p>Yes, a Todo list might sound like the most generic example out there. But it's good exactly because of that. It's simple enough not to get lost in the domain, but rich enough to explore structure, naming, flows, and conventions. The goal isn't to build the most ergonomic Todo list ever. It's to make sure we touch all the relevant edges: command-query endpoints, RESTful alternatives, feature packaging, service layers, repository interfaces, web rendering, and JSON APIs.</p>
+
+            <p>This app is the proving ground. It's where patterns are tested, decisions are made, and structure emerges. Everything the generator will produce later has to work cleanly here first.</p>
+
+            <p>We've talked about the preference for a DDD-inspired structure. But interestingly, in this reference app, it's not the Todo list itself that follows that approach. Instead, the authentication and authorization feature is the one built using this style. It's a bit paradoxical. The auth layer ends up being more complex than the feature it protects. But there's a reason.</p>
+
+            <p>The goal is twofold. First, to demonstrate the DDD-friendly structure in practice. Second, to deliver a reusable component that will become part of the generated foundation for other services. This auth layer is not just for demo purposes. It's meant to be part of the platform kit itself.</p>
+
+            <p>The design follows a hybrid RBAC + ABAC model. Users are assigned roles. Roles define permissions. Individual users can also receive specific permissions on top of their role. This avoids the need for creating one-off roles just to grant a single exception. Then there are resources: entities, identifiers, routes. Each declares the permissions required to interact with them.</p>
+
+            <p>The Todo list feature, on the other hand, is implemented following a more traditional RESTful approach. While it's uncommon for a single service to expose both DDD-style and RESTful endpoints, this reference app includes both because the generator will need to support them. It's a practical foundation for what comes next.</p>
+
+            <p>Both features, auth and todo, are being built with the same underlying structure, even if their routing styles differ. Each one includes or will include:</p>
+
+            <ul>
+                <li>Web and API routing</li>
+                <li>Web and API handlers</li>
+                <li>An app services layer, where all business logic lives (never inside handlers), so it's reusable across web, gRPC, or even CLI interfaces</li>
+                <li>Repo interfaces (with concrete implementations living outside the feature package; for practicality, the first implementation is based on SQLite)</li>
+                <li>Server-side rendered HTML pages with embedded assets (templates, styles, etc.)</li>
+                <li>A template manager to help load, catalog, cache, and inject templates easily into handlers</li>
+                <li>A query manager to define and group queries separately, so query logic doesn't clutter business logic with long SQL strings</li>
+                <li>A migration manager</li>
+                <li>A seed manager to pre-populate initial data in development environments</li>
+            </ul>
+
+            <p>This list will likely evolve. But it already covers most of the pieces that a small-to-medium Go service would need to get off the ground quickly and cleanly.</p>
+
+            <p>Additional features are also planned as the project evolves:</p>
+
+            <ul>
+                <li>Inter-context sync access using gRPC</li>
+                <li>Inter-context async access using pub/sub interfaces (with NATS likely as the first concrete implementation)</li>
+                <li>NoSQL support (e.g. MongoDB, as an alternative implementation of the same repository interfaces)</li>
+                <li>Support for external template and asset loading (as an alternative to embedded resources, allowing live edits or CDN-level caching when needed)</li>
+                <li>Unit testing scaffolding, including a fixture manager that may share much of its core with the seed system</li>
+                <li>Asset processing pipeline</li>
+                <li>Containerization and orchestration-ready setup</li>
+            </ul>
+
+            <p>Not everything needs to be in place from day one. The idea is to make space for it as the design matures. The focus is on keeping things simple now, while allowing room to grow.</p>
+
+            <h2>Closing thoughts</h2>
+
+            <p>This document isn't part of a content strategy. I'm not writing Aquamarine to have something to publish, if anything, the writing is just a consequence of the work.</p>
+
+            <p>Documenting the process helps me think, prioritize, and stay consistent. In that sense, this post is more of a structured braindump. It's useful not just for others, but for myself. At some point, it might make sense to split it into a proper guide or series of posts, but that will happen naturally if the project evolves in that direction.</p>
+
+            <p>For now, consider this a living outline. It will grow as the project grows.</p>
+
+            <hr>
+
+            <p>You can find the source code for the Todo List reference app here:<br>
+            <a href="https://github.com/aquamarinepk/todo">github.com/aquamarinepk/todo</a></p>
+        </article>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Adrian PK</p>
+        <span class="generator">Generated with <a href="https://github.com/cliossg/clio">Clio</a></span>
+    </footer>
+    <!-- Cookie Banner -->
+    <div id="cookie-banner" class="cookie-banner hidden">
+        <p>This site uses cookies to analyze traffic. By continuing to use this site, you accept our use of cookies.</p>
+        <button onclick="acceptCookies()">Accept</button>
+    </div>
+    <script>
+        if (!localStorage.getItem('cookiesAccepted')) {
+            document.getElementById('cookie-banner').classList.remove('hidden');
+        }
+        function acceptCookies() {
+            localStorage.setItem('cookiesAccepted', 'true');
+            document.getElementById('cookie-banner').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

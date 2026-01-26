@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q0L6W62B0S"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-Q0L6W62B0S');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News - Adrian PK</title>
+    <meta name="description" content="Updates and announcements.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="/assets/css/styles.css" rel="stylesheet">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <nav>
+        <div class="site-container" style="padding: 0;">
+            <a href="/">adrianpk.com</a>
+            <a href="/it/">IT</a>
+            <a href="/nei/">Nei</a>
+            <a href="/news/" class="active">News</a>
+        </div>
+    </nav>
+
+    <!-- Hero with Frosted Glass -->
+    <div class="hero-wrapper boxed">
+        <img class="hero-image" src="/assets/images/sections/news.png" alt="News Section">
+        <div class="hero-title-box">
+            <h1 class="hero-title">News</h1>
+            <p class="hero-subtitle">Updates and Announcements</p>
+        </div>
+    </div>
+
+    <div class="site-container">
+        <div class="list-grid">
+            <!-- A Quiet Reset - Mar 23, 2025 -->
+            <div class="list-card">
+                <a href="/news/a-quiet-reset-5623651ccfb/" class="list-card-link">
+                    <img class="list-card-image" src="/assets/images/posts/a-quiet-reset/header.webp" alt="A Quiet Reset">
+                    <div class="list-card-content">
+                        <h2 class="list-card-title">A Quiet Reset</h2>
+                        <p class="list-card-excerpt">Starting fresh, again.</p>
+                        <div class="list-card-meta">
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            <span>March 23, 2025</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Adrian PK</p>
+        <span class="generator">Generated with <a href="https://github.com/cliossg/clio">Clio</a></span>
+    </footer>
+    <!-- Cookie Banner -->
+    <div id="cookie-banner" class="cookie-banner hidden">
+        <p>This site uses cookies to analyze traffic. By continuing to use this site, you accept our use of cookies.</p>
+        <button onclick="acceptCookies()">Accept</button>
+    </div>
+    <script>
+        if (!localStorage.getItem('cookiesAccepted')) {
+            document.getElementById('cookie-banner').classList.remove('hidden');
+        }
+        function acceptCookies() {
+            localStorage.setItem('cookiesAccepted', 'true');
+            document.getElementById('cookie-banner').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
